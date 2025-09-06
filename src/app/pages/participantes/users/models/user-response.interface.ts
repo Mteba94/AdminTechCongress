@@ -11,12 +11,16 @@ export interface UserResponse {
   telefono: string;
   fechaNacimiento: Date;
   tipoIdentificacionId: number;
+  tipoIdentificacionNombre?: string;
   numeroIdentificacion: string;
   nivelAcademico: number;
   semestre: number;
   estado: number;
   estadoDescripcion: any;
+  icView: string;
   icEdit: string;
   icDelete: string;
 }
+
+
 

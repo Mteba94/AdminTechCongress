@@ -14,6 +14,11 @@ export const navbarData: INavbarData[] = [
     label: 'Participantes',
     items: [
       {
+        path: 'usersList',
+        icon: 'groups',
+        label: 'Listado Participantes',
+      },
+      {
         path: 'tipoParticipante',
         icon: '',
         label: 'Tipo de participante',

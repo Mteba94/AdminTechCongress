@@ -27,10 +27,10 @@ import { componentRoleSetting } from '../role-list/role-list.config';
   imports: [
     MatButtonModule,
     ReactiveFormsModule,
-    GsTextComponent,
-    GsSelectComponent,
+    // GsTextComponent,
+    // GsSelectComponent,
     MatIconModule,
-    CheckboxComponent,
+    // CheckboxComponent,
   ],
   templateUrl: './role-management.html',
   animations: [scaleIn400ms, fadeInRight400ms],

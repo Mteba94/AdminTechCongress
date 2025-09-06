@@ -1,68 +1,32 @@
-import { MenuFilterTable } from '@shared/models/reusables/filter-menu-states.interface';
-import { GenericButton } from '@shared/models/reusables/generic-button.interface';
-import { TableColumns } from '@shared/models/reusables/list-table.interface';
-import { SplitButton } from '@shared/models/reusables/split-button.interface';
-import { GenericValidators } from '@shared/utils/generic-validators.util';
-import { UserResponse } from '../../models/user-response.interface';
+import { CatalogoResponse } from "@app/pages/tipo-participantes/models/catalogo-response.interface";
+import { MenuFilterTable } from "@shared/models/reusables/filter-menu-states.interface";
+import { GenericButton } from "@shared/models/reusables/generic-button.interface";
+import { TableColumns } from "@shared/models/reusables/list-table.interface";
+import { SplitButton } from "@shared/models/reusables/split-button.interface";
+import { GenericValidators } from "@shared/utils/generic-validators.util";
 
-const tableColumns: TableColumns<UserResponse>[] = [
+const tableColumns: TableColumns<CatalogoResponse>[] = [
   {
     label: 'Nombre',
     cssLabel: ['font-bold', 'text-xs', 'text-am-main-blue-dark'],
-    property: 'nombreCompleto',
+    property: 'nombre',
     cssProperty: ['text-xs', 'font-bold', 'whitespace-normal', 'max-w-120'],
     type: 'text',
     sticky: false,
     sort: true,
-    sortProperty: 'pnombre',
+    sortProperty: 'nombre',
     visible: true,
     download: true,
   },
   {
-    label: 'Email', // COLUMNA DE MI TABLA USUARIOS
+    label: 'Descripcion', // COLUMNA DE MI TABLA USUARIOS
     cssLabel: ['font-bold', 'text-xs', 'text-am-main-blue-dark'],
-    property: 'email',
+    property: 'descripcion',
     cssProperty: ['text-xs', 'font-bold', 'whitespace-normal', 'max-w-120'],
     type: 'text',
     sticky: false,
     sort: true,
-    sortProperty: 'email',
-    visible: true,
-    download: true,
-  },
-  {
-    label: 'Teléfono', // COLUMNA DE MI TABLA USUARIOS
-    cssLabel: ['font-bold', 'text-xs', 'text-am-main-blue-dark'],
-    property: 'telefono',
-    cssProperty: ['text-xs', 'font-bold', 'whitespace-normal', 'max-w-120'],
-    type: 'text',
-    sticky: false,
-    sort: true,
-    sortProperty: 'telefono',
-    visible: true,
-    download: true,
-  },
-  {
-    label: 'Tipo Participante',
-    cssLabel: ['font-bold', 'text-xs', 'text-am-main-blue-dark'],
-    property: 'tipoParticipanteNombre',
-    cssProperty: ['text-xs', 'font-bold', 'whitespace-normal', 'max-w-120'],
-    type: 'text',
-    sticky: false,
-    sort: true,
-    sortProperty: 'tipoParticipanteNombre',
-    visible: true,
-    download: true,
-  },
-  {
-    label: 'Fecha Nacimiento',
-    cssLabel: ['font-bold', 'text-xs', 'text-am-main-blue-dark'],
-    property: 'fechaNacimiento',
-    cssProperty: ['text-xs', 'font-bold', 'whitespace-normal', 'max-w-120'],
-    type: 'date',
-    sticky: false,
-    sort: true,
-    sortProperty: 'fechaNacimiento',
+    sortProperty: 'descripcion',
     visible: true,
     download: true,
   },
@@ -74,7 +38,7 @@ const tableColumns: TableColumns<UserResponse>[] = [
     type: 'simpleBadge',
     sticky: false,
     sort: true,
-    sortProperty: 'state',
+    sortProperty: 'estadoDescripcion',
     visible: true,
   },
   {
@@ -131,9 +95,9 @@ const searchOptions = [
 ];
 
 const actionButtonUser: GenericButton = {
-  label: 'Crear usuario',
+  label: 'Crear',
   icon: 'add',
-  tooltip: 'Crear nuevo usuario',
+  tooltip: 'Crear nuevo Tipo de Participante',
 };
 
 const menuItems: MenuFilterTable = {
@@ -189,7 +153,7 @@ const filters = {
   refresh: false,
 };
 
-export const componentUserSetting = {
+export const componentTipoDocumentoSetting = {
   tableColumns,
   searchOptions,
   menuItems,
@@ -200,5 +164,5 @@ export const componentUserSetting = {
   filters,
   initialSort: 'id',
   initialSortDir: 'desc',
-  filename: 'lista-de-usuarios',
+  filename: 'lista-tipo-participante',
 };

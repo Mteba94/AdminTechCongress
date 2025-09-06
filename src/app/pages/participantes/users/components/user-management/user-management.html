@@ -1,0 +1,48 @@
+<form [formGroup]="userForm">
+  <h2 mat-dialog-title class="headline m-0 text-xl text-accent">
+    <strong class="text-am-main-blue-dark">
+      @if(data.mode === 'create') { Crear Participante }
+      @if(data.mode === 'read') { Ver Participante } 
+      @if (data.mode === 'update') { Actualizar Participante }
+    </strong>
+  </h2>
+  <mat-dialog-content>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+      <app-input-text label="Primer Nombre" [mode]="mode" [required]="true" placeholder="Ingrese el primer nombre" [inputControl]="userForm.get('pnombre')" />
+      <app-input-text label="Segundo Nombre" [mode]="mode" placeholder="Ingrese el segundo nombre" [inputControl]="userForm.get('snombre')" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+      <app-input-text label="Primer Apellido" [mode]="mode" [required]="true" placeholder="Ingrese el primer apellido" [inputControl]="userForm.get('papellido')" />
+      <app-input-text label="Segundo Apellido" [mode]="mode" placeholder="Ingrese el segundo apellido" [inputControl]="userForm.get('sapellido')" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+      <app-input-text label="Email" [mode]="mode" [required]="true" placeholder="Ingrese el email" [inputControl]="userForm.get('email')" />
+      <app-input-text label="Teléfono" [mode]="mode" [required]="true" placeholder="Ingrese el teléfono" [inputControl]="userForm.get('telefono')" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+      <mat-form-field>
+        <mat-label>Fecha de Nacimiento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fechaNacimiento" [readonly]="mode === 'read'">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <app-input-select label="Tipo de Participante" [mode]="mode" [required]="true" placeholder="Seleccione el tipo de participante" [aOptions]="(tiposParticipante$ | async) ?? []" [inputControl]="userForm.get('tipoParticipanteId')" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+      <app-input-select label="Tipo de Documento" [mode]="mode" [required]="true" placeholder="Seleccione el tipo de documento" [aOptions]="(tiposDocumento$ | async) ?? []" [inputControl]="userForm.get('tipoIdentificacionId')" />
+      <app-input-text label="Número de Identificación" [mode]="mode" [required]="true" placeholder="Ingrese el número de identificación" [inputControl]="userForm.get('numeroIdentificacion')" />
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+        <app-input-text label="Nivel Académico" [mode]="mode" placeholder="Ingrese el nivel académico" [inputControl]="userForm.get('nivelAcademico')" />
+        <app-input-text label="Semestre" [mode]="mode" placeholder="Ingrese el semestre" [inputControl]="userForm.get('semestre')" />
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancelar</button>
+    @if(data.mode !== 'read') {
+      <button color="purple" class="bg-accent text-accent-contrast" mat-button (click)="userSave()" [disabled]="userForm.invalid">
+        Guardar
+      </button>
+    }
+  </mat-dialog-actions>
+</form>

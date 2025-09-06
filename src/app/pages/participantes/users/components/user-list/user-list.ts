@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { fadeInRight400ms } from '@shared/animations/fade-in-right.animation';
@@ -38,9 +38,27 @@ export class UserList {
 
   iconUser$ = 'groups';
   resetChecks: boolean = false;
+  dialogMode: 'read' | 'update' = 'update';
 
   rowClick(event: RowClick<UserResponse>) {
     console.log('event ', event);
+    
+    let action = event.action;
+    let patient = event.row;
+
+    switch (action) {
+      case 'view':
+        this.dialogMode = 'read';
+        this.viewUser(patient);
+        break;
+      case 'edit':
+        this.dialogMode = 'update';
+        this.viewUser(patient);
+        break;
+      case 'delete':
+        //this.patientDelete(patient);
+        break;
+    }
   }
 
   search(data: SearchBox) {
@@ -102,6 +120,26 @@ export class UserList {
     this.formatGetInputs();
   }
 
+  private usersDetailEffect = effect(() => {
+    const usersDetail = this.userService.getUserByIdSignal();
+
+    if(usersDetail){
+      let dialogRef = this.dialog.open(UserManagement, {
+        data: { mode: this.dialogMode, usersDetail },
+        disableClose: true,
+        width: '500px',
+        enterAnimationDuration: 250,
+        exitAnimationDuration: 250,
+      });
+
+      dialogRef.afterClosed().subscribe((res) => {
+        if(res){
+          this.userService['userByIdSignal'].set(null);
+        }
+      })
+    }
+  })
+
   newUser() {
     this.dialog
       .open(UserManagement, {
@@ -117,6 +155,10 @@ export class UserList {
           this.setGetInputsUser(true);
         }
       });
+  }
+
+  async viewUser(req: UserResponse){
+    this.userService.userById(req.userId);
   }
 
   setGetInputsUser(refresh: boolean) {

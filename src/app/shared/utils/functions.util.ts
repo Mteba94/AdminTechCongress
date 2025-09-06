@@ -42,6 +42,9 @@ export function getIcon(
     icon: iconName,
     css: generalCss + COLORS_BADGE.main,
   };
+  if (['visibility'].includes(iconName)) {
+    iconObj.css = generalCss + COLORS_BADGE.coral;
+  }
   if (['edit'].includes(iconName)) {
     iconObj.css = generalCss + COLORS_BADGE.main;
   }

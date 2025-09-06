@@ -3,41 +3,34 @@ import { Layout } from './pages/layout/layout/layout';
 
 const childrenRoutes: Routes = [
   {
-    path: 'users',
+    path: '',
+    redirectTo: 'usersList',
+    pathMatch: 'full',
+  },
+  {
+    path: 'usersList',
     loadComponent: () =>
-      import('./pages/users/components/user-list/user-list').then(
+      import('./pages/participantes/users/components/user-list/user-list').then(
         (c) => c.UserList
       ),
   },
-//   {
-//     path: 'roles',
-//     loadComponent: () =>
-//       import('./pages/roles/components/role-list/role-list').then(
-//         (c) => c.RoleList
-//       ),
-//   },
-//   {
-//     path: 'roles/crear',
-//     loadComponent: () =>
-//       import('./pages/roles/components/role-management/role-management').then(
-//         (c) => c.RoleManagement
-//       ),
-//   },
-//   {
-//     path: 'roles/editar/:roleId',
-//     loadComponent: () =>
-//       import('./pages/roles/components/role-management/role-management').then(
-//         (c) => c.RoleManagement
-//       ),
-//   },
+  {
+    path: 'tipoParticipante',
+    loadComponent: () =>
+      import('./pages/tipo-participantes/components/tipo-participante-list/tipo-participante-list').then(
+        (c) => c.TipoParticipanteList
+      ),
+  },
+  {
+    path: 'tipoIdentificacion',
+    loadComponent: () =>
+      import('./pages/participantes/tipo-documento/components/tipo-documento-list/tipo-documento-list').then(
+        (c) => c.TipoDocumentoList
+      ),
+  }
 ];
 
 export const routes: Routes = [
-    {
-    path: '',
-    redirectTo: 'users',
-    pathMatch: 'full',
-  },
   {
     path: '',
     component: Layout,
